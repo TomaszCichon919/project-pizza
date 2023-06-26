@@ -59,7 +59,8 @@ const select = {
       thisProduct.id = id;
       thisProduct.data = data;
       thisProduct.renderInMenu();
-      console.log('new Product:', thisProduct);
+      //console.log('new Product:', thisProduct);
+      this.initAcordeon();
 
     }
 
@@ -75,6 +76,29 @@ const select = {
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+
+    initAcordeon() {
+      const thisProduct = this;
+      /*find the clickable trigger*/
+      const clickableTrigger = document.querySelectorAll(select.menuProduct.clickable);
+      console.log(clickableTrigger);
+      /*Start add event listener to clickable trigger on event click*/
+      clickableTrigger.addEventListener('click', function(event) {
+        /*prevent default action for event*/
+        event.preventDefault();
+        /*find active product (product that has active class)*/
+        const activeProduct = document.querySelector(classNames.menuProduct.wrapperActive);
+        console.log(activeProduct);
+        /*if there is active porduct and it's not thisProduct.element, remove class active from it */
+        if (activeProduct != "null" && activeProduct != thisProduct.element) {
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+        }
+        else {console.log ("test");}
+        /* toggle active class on thisProduct.element*/
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+      console.log ("click");
+      });
+    }
   }
   const app = {
     initMenu: function () {
@@ -83,7 +107,7 @@ const select = {
 
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
-        console.log(productData);
+        //console.log(productData);
       }
       
     },
