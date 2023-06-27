@@ -93,6 +93,7 @@ const select = {
       //console.log(thisProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       //console.log(thisProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordin() {
@@ -145,6 +146,8 @@ const select = {
       // set price to default price
       let price = thisProduct.data.price;
 
+
+      
       // for every category (param)...
       for(let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
@@ -157,6 +160,18 @@ const select = {
           const option = param.options[optionId];
           console.log(optionId, option);
 
+          //find img
+
+           const optionImage = thisProduct.imageWrapper.querySelector('".' + paramId + '-'+ optionId + '"');
+           console.log(optionImage);
+           if (optionImage == false) {console.log ("not found");
+           } else {if (formData[paramId] && formData[paramId].includes(optionId)) {
+             optionImage.classList.add(classNames.menuProduct.imageVisible)}
+             else if (formData[paramId] && !formData[paramId].includes(optionId)){
+               optionImage.classList.remove(classNames.menuProduct.imageVisible)}
+             }
+
+
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(formData[paramId] && formData[paramId].includes(optionId)) {
               // check if the option is not default
@@ -168,6 +183,7 @@ const select = {
               if(option.default == true) {
                   // reduce price variable
                    console.log (price);}
+
   
             }
           } else if (formData[paramId] && !formData[paramId].includes(optionId)){
