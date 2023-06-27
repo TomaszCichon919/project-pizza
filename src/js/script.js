@@ -106,11 +106,11 @@ const select = {
         /*prevent default action for event*/
         event.preventDefault();
         /*find active product (product that has active class)*/
-        const activeProduct = document.querySelector(".active");
+        const activeProduct = document.querySelector(select.menuProduct.clickable);
         console.log(activeProduct);
         /*if there is active porduct and it's not thisProduct.element, remove class active from it */
         if (activeProduct != "null" && activeProduct != thisProduct.element) {
-          activeProduct.classList.remove("active");
+          activeProduct.classList.remove(select.menuProduct.clickable);
         }
         //else {console.log ("test");}
         /* toggle active class on thisProduct.element*/
@@ -162,9 +162,9 @@ const select = {
 
           //find img
 
-           const optionImage = thisProduct.imageWrapper.querySelector('".' + paramId + '-'+ optionId + '"');
+           const optionImage = thisProduct.imageWrapper.querySelector('.'+ paramId + '-'+ optionId);
            console.log(optionImage);
-           if (optionImage == false) {console.log ("not found");
+           if (optionImage == null) {console.log ("not found");
            } else {if (formData[paramId] && formData[paramId].includes(optionId)) {
              optionImage.classList.add(classNames.menuProduct.imageVisible)}
              else if (formData[paramId] && !formData[paramId].includes(optionId)){
