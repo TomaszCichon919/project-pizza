@@ -197,7 +197,7 @@
           const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
           //console.log(optionImage);
           if (optionImage == null) {
-            console.log("not found");
+           // console.log("not found");
           } else {
             if (formData[paramId] && formData[paramId].includes(optionId)) {
               optionImage.classList.add(classNames.menuProduct.imageVisible)
@@ -215,29 +215,7 @@
               // add option price to price variable
               price = price + option.price
             }
-            else {
-              // check if the option is default
-              if (option.default == true) {
-                // reduce price variable
-                console.log(price);
-              }
-
-
-            }
-          } else if (formData[paramId] && !formData[paramId].includes(optionId)) {
-            // check if the option is not default
-            if (!option.default == true) {
-              // add option price to price variable
-              console.log(price)
-            }
-            else {
-              // check if the option is default
-              if (option.default == true) {
-                // reduce price variable
-                price = price - option.price
-              }
-            }
-          }
+          } 
         }
       }
 
@@ -393,6 +371,7 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = select.cart.productList;
     }
     initActions() {
       const thisCart = this;
