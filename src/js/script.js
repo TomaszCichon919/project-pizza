@@ -231,7 +231,6 @@
 
     initAmountWidget() {
       const thisProduct = this;
-
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
       thisProduct.amountWidgetElem.addEventListener('updated', function () {
         thisProduct.processOrder();
@@ -322,7 +321,7 @@
 
     announce() {
       const thisWidget = this;
-      const event = new Event('updated');
+      const event = new CustomEvent('updated', {bubbles: true});
       thisWidget.element.dispatchEvent(event);
     }
 
@@ -372,6 +371,10 @@
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = document.querySelector(select.containerOf.cart);
+      thisCart.dom.deliveryFee = document.querySelector(select.cart.deliveryFee);
+      thisCart.dom.subtotalPrice = document.querySelector(select.cart.subtotalPrice);
+      thisCart.dom.totalPrices = document.querySelectorAll(select.cart.totalPrice);
+      thisCart.dom.totalNumber = document.querySelector(select.cart.totalNumber);
       console.log(thisCart.dom.productList);
     }
     initActions() {
@@ -381,6 +384,37 @@
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       })
     }
+
+    update () {
+      const thisCart = this;
+ 
+       const deliveryFee = settings.cart.defaultDeliveryFee;
+       let totalNumber = 0;
+       let subtotalPrice = 0;
+ 
+       for (let product of thisCart.products) {
+           totalNumber = totalNumber + product.amount;
+           subtotalPrice = subtotalPrice + product.price;
+       }
+ 
+       if (totalNumber != 0) {
+         thisCart.totalPrice = subtotalPrice + deliveryFee;
+       }
+       else {
+         thisCart.totalPrice = 0;
+       }
+       console.log('total number', totalNumber);
+       console.log('total price', thisCart.totalPrice);
+       console.log('sub total', subtotalPrice);
+       thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+       thisCart.dom.totalNumber.innerHTML = totalNumber;
+       thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+
+       for (let total of thisCart.dom.totalPrices) {
+       total.innerHTML = thisCart.totalPrice;}
+
+
+     }
 
     add(menuProduct) {
       const thisCart = this;
@@ -396,7 +430,9 @@
        console.log('add product', menuProduct);
        thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       console.log('thisCart.products', thisCart.products);
+      thisCart.update ();
     }
+
   }
 
   class CartProduct {
@@ -409,6 +445,7 @@
       thisCartProduct.priceSingle = menuProduct.priceSingle;
       thisCartProduct.params = menuProduct.params;
       thisCartProduct.getElements(element);
+      thisCartProduct.initAmountWidget ();
       console.log(thisCartProduct);
 
     }
@@ -417,11 +454,24 @@
       const thisCartProduct = this;
       thisCartProduct.dom = {};
       thisCartProduct.dom.wrapper = element;
-      thisCartProduct.dom.amountWidget = select.cartProduct.amountWidget;
+      thisCartProduct.dom.amountWidgetElem = select.cartProduct.amountWidget;
       thisCartProduct.dom.price = select.cartProduct.price;
       thisCartProduct.dom.edit = select.cartProduct.edit;
       thisCartProduct.dom.remove = select.cartProduct.remove;
+      thisCartProduct.dom.amountWid = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.priceNew = thisCartProduct.dom.wrapper.querySelector(thisCartProduct.dom.price);
     }
+     initAmountWidget () {
+     const thisCartProduct = this;
+
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWid);
+      thisCartProduct.dom.amountWid.addEventListener('updated', function () {
+      const amount = thisCartProduct.amountWidget.value;
+      thisCartProduct.amount = amount;
+       const price = thisCartProduct.priceSingle * amount;
+        thisCartProduct.dom.priceNew.innerHTML = price;
+      });
+     }
     
   }
   const app = {
