@@ -218,7 +218,13 @@
               // add option price to price variable
               price = price + option.price
             }
-          } 
+          } else if (formData[paramId] && !formData[paramId].includes(optionId)) {
+            // check if the option is not default
+            if (option.default == true) {
+              // reduce price variable
+             price = price - option.price
+            }
+          }
         }
       }
 
