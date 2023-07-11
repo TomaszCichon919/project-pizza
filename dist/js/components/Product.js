@@ -1,7 +1,7 @@
 
 import AmountWidget from './AmountWidget.js';
-import {templates, select, classNames} from '/js/settings.js';
-import utils from '/js/utils.js';
+import {templates, select, classNames} from '../settings.js';
+import utils from '../utils.js';
 //import app from './app.js'
 class Product {
     constructor(id, data) {
