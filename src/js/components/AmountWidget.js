@@ -3,8 +3,8 @@ class AmountWidget {
     constructor(element) {
       const thisWidget = this;
 
-      console.log('AmountWidget', thisWidget);
-      console.log('constructor arguments:', element);
+    //   console.log('AmountWidget', thisWidget);
+    //   console.log('constructor arguments:', element);
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
