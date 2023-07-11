@@ -12,14 +12,15 @@
       const idFromHash = window.location.hash.replace('#/', '');
       
 
-      let pageMachingHash = thisApp.pages[0].id;
+      let pageMatchingHash = thisApp.pages[0].id;
+
       for(let page of thisApp.pages) {
         if(page.id == idFromHash){
-          pageMachingHash = page.id;
+          pageMatchingHash = page.id;
           break;
         }
       }
-      thisApp.activatePage(idFromHash);
+      thisApp.activatePage(pageMatchingHash);
       for(let link of thisApp.navLinks) {
         link.addEventListener('click', function(event){
           const clickedElement = this;
