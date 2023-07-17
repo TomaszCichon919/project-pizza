@@ -6,6 +6,7 @@ import utils from '../utils.js';
 class Booking {
 constructor(element) {
 const thisBooking = this;
+thisBooking.pickedTable = 0
 thisBooking.render(element);
 thisBooking.initWidgets();
 thisBooking.getData();
@@ -144,8 +145,41 @@ updateDOM(){
                 table.classList.remove(classNames.booking.tableBooked);
             }
     }
+            thisBooking.allTables = thisBooking.dom.tableWrapper.querySelectorAll(select.booking.tables);
+            for(const table of thisBooking.allTables){
+                table.classList.remove(classNames.booking.tableSelect);
+            }
 }
 
+initTables(event){
+    const thisBooking = this;
+    console.log("clicked");
+    const selectedTable = event.target.getAttribute(settings.booking.tableIdAttribute);
+    console.log('selected table', selectedTable);
+    if (selectedTable >= 1 && selectedTable <= 3){
+        console.log('succes');
+        
+        if(event.target.classList.contains(classNames.booking.tableBooked)){
+        alert("already booked!");
+        }
+        else {
+
+            if(event.target.classList.contains(classNames.booking.tableSelect)){
+                event.target.classList.remove(classNames.booking.tableSelect);
+                thisBooking.pickedTable = 0;
+            } else {
+            thisBooking.pickedTable = selectedTable;
+            thisBooking.allTables =thisBooking.dom.tableWrapper.querySelectorAll(select.booking.tables);
+            for(const table of thisBooking.allTables){
+                table.classList.remove(classNames.booking.tableSelect);
+            }
+            event.target.classList.add(classNames.booking.tableSelect);
+            console.log("the end");
+        }
+        }
+    } 
+    
+}
 
 render(element){
 const thisBooking = this;
@@ -161,6 +195,7 @@ thisBooking.dom = {};
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.tableWrapper = thisBooking.dom.wrapper.querySelector(select.booking.tableWrapper);
     
 }
 
@@ -180,6 +215,10 @@ initWidgets() {
     
     thisBooking.dom.wrapper.addEventListener('updated', function (){
     thisBooking.updateDOM();
+    });
+    thisBooking.dom.tableWrapper.addEventListener('click', function (event){
+        thisBooking.initTables(event);
+       
     });
 
 
