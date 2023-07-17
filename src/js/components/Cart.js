@@ -122,7 +122,7 @@ class Cart {
         deliveryFee: thisCart.dom.deliveryFee,
         products: [],
       }
-      console.log("kamehameha!!!!", payload);
+      //console.log("kamehameha!!!!", payload);
 
       for(let prod of thisCart.products) {
         payload.products.push(prod.getData());

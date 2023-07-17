@@ -62,6 +62,9 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     tableWrapper: '.floor-plan',
+    form:'.booking-form',
+    phone: '[name="phone"]',
+    address: '[name="address"]',
     
   },
 
@@ -116,7 +119,7 @@ export const settings = {
   db: {
     url: '//localhost:3131',
     products: 'products',
-    order: 'orders',
+    orders: 'orders',
     bookings: 'bookings',
     event: 'events',
     dateStartParamKey: 'date_gte',
