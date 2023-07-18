@@ -1,0 +1,115 @@
+.links {
+    color: $color-light
+}
+.hours{
+    background-color: pink;
+    text-align: center;
+}
+.hours h2 {
+    margin: auto;
+}
+.hours span {
+    margin: auto;
+}
+.box {
+    position: relative;
+}
+.box-img {
+    height: 20vh;
+    width: 100%;
+    object-fit: cover;
+   
+}
+.box-link{
+    color: $color-light;
+    text-decoration: none;
+    position: absolute;
+
+}
+
+.carousel {
+    height: 40vh;
+    
+}
+
+
+.carousel-cell {
+    display: flex;
+    position: relative;
+    padding: 0 5px;
+}
+.carousel-img {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-right: 20px;
+  }
+  
+  .carousel-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    position: relative;
+  }
+  
+  
+  
+  .carousel-text {
+      flex: 1;
+    text-align: left;
+    position: relative;
+    width: 100%;
+  }
+
+
+  .gallery img {
+    width: 100%;
+    height: 200px;
+    padding-bottom: 10px
+  }
+  .icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+  }
+
+
+.icons a {
+visibility: hidden;
+
+}
+
+.icons i {
+font-size: 1.75em;
+margin: 0 5%;
+color: $color-light;
+}
+.gallery-img {
+    position: relative;
+}
+.gallery-img:hover {
+    img {
+      filter: brightness(50%);
+    }
+  
+    .icons a {
+        visibility: visible;
+    
+    }
+  }
+  
+  .icons i:hover {
+    color: $color-main;
+  }
+  
+  footer {
+   
+      color: $color-main;
+    }
+  
+
+ 

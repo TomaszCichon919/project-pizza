@@ -2,13 +2,14 @@
  import Product from './components/Product.js';
  import Cart from './components/Cart.js'; 
  import Booking from './components/Booking.js'; 
+ import Home from './components/Home.js';
 
   const app = {
     initPages: function() {
       const thisApp = this;
       thisApp.pages = document.querySelector(select.containerOf.pages).children;
 
-      thisApp.navLinks = document.querySelectorAll(select.nav.links);
+      thisApp.navLinks = document.querySelectorAll('.main-nav a, .box-link');
 
       const idFromHash = window.location.hash.replace('#/', '');
       
@@ -101,6 +102,12 @@
       thisApp.booking = new Booking(bookingElem);
     },
 
+    initHome: function () {
+      const thisApp = this;
+      const homeElem = document.querySelector(select.containerOf.homePage);
+      thisApp.booking = new Home(homeElem);
+    },
+
 
     init: function () {
       const thisApp = this;
@@ -111,8 +118,10 @@
       // console.log('templates:', templates);
       thisApp.initData ();
       thisApp.initCart();
+      thisApp.initHome();
       thisApp.initPages();
       thisApp.initBooking();
+      
 
     },
 
