@@ -4,7 +4,7 @@ class Home {
     constructor(element) {
         const thisHome = this;
         thisHome.render(element);
-        thisHome.initWidgets();
+        setTimeout(function(){thisHome.initWidgets();}, 5);
     
 }
     
