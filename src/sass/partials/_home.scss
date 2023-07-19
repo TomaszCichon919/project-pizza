@@ -1,8 +1,11 @@
+
+// link section
+
 .links {
-    color: $color-light
+    color: $color-light;
 }
 .hours{
-    background-color: pink;
+    background-color: $color-main;
     text-align: center;
 }
 .hours h2 {
@@ -11,11 +14,12 @@
 .hours span {
     margin: auto;
 }
-.box {
-    position: relative;
+.box{
+  height: 10vh;
 }
+
 .box-img {
-    height: 20vh;
+    height: 10vh;
     width: 100%;
     object-fit: cover;
    
@@ -23,14 +27,49 @@
 .box-link{
     color: $color-light;
     text-decoration: none;
-    position: absolute;
+    z-index: 1;
+    font-size: 1.2em;
+    font-weight: 300;
 
 }
+.box-link-span{
+  visibility: hidden;
+  margin: 0;
+  position: absolute;
+  top: 88%;
+  left: 25%;
+  transition-property: visibility, top;
+  transition-duration: 0.4s, 1s;
 
-.carousel {
-    height: 40vh;
-    
 }
+.box-text{
+  top: 40%;
+  left: 30%;
+  transition: all 1s;
+}
+
+.box:hover .box-link {
+  
+    text-decoration: none;
+    color: $color-light;
+}
+
+  .box:hover .box-text {
+    top: 30%;
+    left: 30%;
+  }
+
+  .box:hover .box-link-span {
+    visibility: visible;
+    top: 50%;
+    left: 25%;
+  }
+
+
+
+// carousel
+
+
 
 
 .carousel-cell {
@@ -61,12 +100,18 @@
     position: relative;
     width: 100%;
   }
+.carousel-main {
+  height: 300px;
+}
 
+
+
+  // gallery
 
   .gallery img {
     width: 100%;
-    height: 200px;
-    padding-bottom: 10px
+    height: 100%;
+    padding-bottom: 10px;
   }
   .icons {
     position: absolute;
@@ -106,9 +151,12 @@ color: $color-light;
     color: $color-main;
   }
   
-  footer {
+  // footer
+
+  footer a {
    
       color: $color-main;
+      padding-left: 20px;
     }
   
 

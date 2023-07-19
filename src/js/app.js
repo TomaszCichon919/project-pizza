@@ -9,12 +9,13 @@
       const thisApp = this;
       thisApp.pages = document.querySelector(select.containerOf.pages).children;
 
+
       thisApp.navLinks = document.querySelectorAll('.main-nav a, .box-link');
 
       const idFromHash = window.location.hash.replace('#/', '');
       
 
-      let pageMatchingHash = thisApp.pages[0].id;
+      let pageMatchingHash = thisApp.pages[2].id;
 
       for(let page of thisApp.pages) {
         if(page.id == idFromHash){
